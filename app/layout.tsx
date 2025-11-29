@@ -7,8 +7,12 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 export const metadata: Metadata = {
-  title: "ZenDoOne - One Thing at a Time",
-  description: "A mindful productivity app for macOS.",
+  title: "ZenDoOne - In. Out. Done.",
+  description: "In. Out. Done. A mindful productivity app for macOS.",
+  icons: {
+    icon: "/app-icon.png",
+    apple: "/app-icon.png",
+  },
 };
 
 export default function RootLayout({
