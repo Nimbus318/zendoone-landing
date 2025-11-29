@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: "ZenDoOne - In. Out. Done.",
   description: "Minimal macOS menu bar app that helps you focus on one thing, then gets out of your way.",
   icons: {
-    icon: "/app-icon.png",
-    apple: "/app-icon.png",
+    icon: "/favicon.ico",
+    apple: "/app-icon-256.png",
   },
 };
 

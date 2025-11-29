@@ -35,7 +35,7 @@ export const Desktop = () => {
   }
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[url('https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-blue-dark-mode-layers-5k-6016x3384-5895.jpg')] bg-cover bg-center">
+    <div className="relative w-screen h-screen overflow-hidden bg-[url('/macos-wallpaper.jpg')] bg-cover bg-center">
       {/* Custom "Tahoe" Vibe Overlay - Deep Blue/Purple to simulate the concept art */}
       <div className="absolute inset-0 bg-blue-900/30 mix-blend-multiply pointer-events-none" />
       

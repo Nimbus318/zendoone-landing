@@ -16,9 +16,9 @@ export const ZenDoOneStatusIcon = ({ className }: { className?: string }) => (
 );
 
 export const ZenDoOneIcon = ({ className }: { className?: string }) => (
-  <img 
-    src="/app-icon.png" 
-    alt="ZenDoOne App Icon" 
+  <img
+    src="/app-icon-256.png"
+    alt="ZenDoOne App Icon"
     className={`object-contain ${className}`}
     draggable={false}
   />
