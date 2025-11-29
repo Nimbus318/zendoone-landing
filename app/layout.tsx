@@ -9,10 +9,6 @@ const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 export const metadata: Metadata = {
   title: "ZenDoOne - In. Out. Done.",
   description: "Minimal macOS menu bar app that helps you focus on one thing, then gets out of your way.",
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/app-icon-256.png",
-  },
 };
 
 export default function RootLayout({
