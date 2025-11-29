@@ -8,7 +8,7 @@ const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 export const metadata: Metadata = {
   title: "ZenDoOne - In. Out. Done.",
-  description: "In. Out. Done. A mindful productivity app for macOS.",
+  description: "Minimal macOS menu bar app that helps you focus on one thing, then gets out of your way.",
   icons: {
     icon: "/app-icon.png",
     apple: "/app-icon.png",
