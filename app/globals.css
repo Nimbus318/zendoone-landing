@@ -5,22 +5,71 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Force Apple's System Font - The secret to looking "Native" */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-hand: var(--font-caveat);
+  
+  /* 
+     macOS Authentic Shadows 
+     1. The Ring: 1px inner/outer border to define the edge (essential for dark mode)
+     2. The Ambient: Small, tight shadow for grounding
+     3. The Diffuse: Large, soft shadow for depth
+  */
+  --shadow-mac-window: 
+    0 0 0 1px rgba(0,0,0,0.18), 
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 20px 40px 0 rgba(0,0,0,0.45);
+    
+  --shadow-mac-dock: 
+    0 0 0 1px rgba(255,255,255,0.15), 
+    0 20px 50px rgba(0,0,0,0.3);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --shadow-mac-menu: 
+    0 1px 0 0 rgba(255,255,255,0.05) inset;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  /* Font Smoothing is CRITICAL for that crisp Mac look */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none; /* Mac OS desktop isn't selectable like text */
+}
+
+/* Utility for VisualEffectView (Vibrancy) Simulation */
+.mac-glass {
+  background: rgba(40, 40, 40, 0.45);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1);
+}
+
+.mac-menu-glass {
+  background: rgba(30, 30, 30, 0.5); /* Darker for menu */
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+}
+
+/* Custom Scrollbar for Parking Lot */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
