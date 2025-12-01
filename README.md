@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://os.nimbus-nimo.com">
-    <img src="public/readme-preview.png" alt="ZenDoOne Web OS Preview" width="100%">
+    <img src="web-demo.jpeg" alt="ZenDoOne Web OS Preview" width="100%">
   </a>
 </p>
 

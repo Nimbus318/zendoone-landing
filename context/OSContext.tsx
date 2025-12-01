@@ -41,7 +41,7 @@ const defaultWindows: Record<AppID, WindowState> = {
   zendoone: { id: "zendoone", title: "ZenDoOne", isOpen: true, isMinimized: false, zIndex: 10 },
   discord: { id: "discord", title: "Discord", isOpen: false, isMinimized: false, zIndex: 1 },
   github: { id: "github", title: "GitHub", isOpen: false, isMinimized: false, zIndex: 1 },
-  settings: { id: "settings", title: "Settings", isOpen: false, isMinimized: false, zIndex: 1 },
+  settings: { id: "settings", title: "System Settings", isOpen: false, isMinimized: false, zIndex: 1 },
   finder: { id: "finder", title: "Finder", isOpen: false, isMinimized: false, zIndex: 1 },
   readme: { id: "readme", title: "README.md", isOpen: false, isMinimized: false, zIndex: 1 },
 };

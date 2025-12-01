@@ -24,14 +24,14 @@ export const Dock = () => {
             boxShadow: '0 0 0 1px rgba(255,255,255,0.1), 0 20px 50px rgba(0,0,0,0.5)'
         }}
       >
-        <DockItem mouseX={mouseX} id="finder" icon={<FinderIcon className="w-full h-full" />} onClick={() => openApp("finder")} isOpen={windows.finder.isOpen} />
-        <DockItem mouseX={mouseX} id="zendoone" icon={<ZenDoOneIcon className="w-full h-full drop-shadow-md" />} onClick={() => openApp("zendoone")} isOpen={windows.zendoone.isOpen} />
+        <DockItem mouseX={mouseX} icon={<FinderIcon className="w-full h-full" />} onClick={() => openApp("finder")} isOpen={windows.finder.isOpen} />
+        <DockItem mouseX={mouseX} icon={<ZenDoOneIcon className="w-full h-full drop-shadow-md" />} onClick={() => openApp("zendoone")} isOpen={windows.zendoone.isOpen} />
         
         {/* Divider */}
         <div className="w-[1px] h-10 bg-white/10 mx-1 self-center border-r border-black/20" />
         
-        <DockItem mouseX={mouseX} id="discord" icon={<DiscordIcon className="w-full h-full" />} onClick={() => openApp("discord")} isOpen={windows.discord.isOpen} />
-        <DockItem mouseX={mouseX} id="github" icon={<GithubIcon className="w-full h-full" />} onClick={() => openApp("github")} isOpen={windows.github.isOpen} />
+        <DockItem mouseX={mouseX} icon={<DiscordIcon className="w-full h-full" />} onClick={() => openApp("discord")} isOpen={windows.discord.isOpen} />
+        <DockItem mouseX={mouseX} icon={<GithubIcon className="w-full h-full" />} onClick={() => openApp("github")} isOpen={windows.github.isOpen} />
       </div>
     </div>
   );

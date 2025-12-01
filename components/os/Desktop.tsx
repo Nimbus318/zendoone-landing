@@ -126,14 +126,14 @@ export const Desktop = () => {
 
             {/* System Settings Window */}
             <div className="pointer-events-auto">
-                <Window id="settings" width={640} height={480} title="System Settings" titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
+                <Window id="settings" width={640} height={480} titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
                     <SystemSettings />
                 </Window>
             </div>
 
             {/* Readme Window */}
             <div className="pointer-events-auto">
-                <Window id="readme" width={600} height={650} title="README.md" titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
+                <Window id="readme" width={600} height={650} titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
                     <ReadmeApp />
                 </Window>
             </div>
