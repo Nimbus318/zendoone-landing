@@ -5,25 +5,21 @@ import { MenuBar } from "./MenuBar";
 import { Dock } from "./Dock";
 import { Window } from "./Window";
 import { ZenDoOneApp } from "@/components/apps/ZenDoOne";
+import { SystemSettings } from "@/components/apps/SystemSettings";
+import { ReadmeApp } from "@/components/apps/Readme";
 import { useOS } from "@/context/OSContext";
-import { Github, MessageCircle } from "lucide-react";
+import { Github } from "lucide-react";
 
 export const Desktop = () => {
-  const { windows, openApp, zenDoOneIconRect } = useOS();
+  const { zenDoOneIconRect, openApp } = useOS();
   
   // State to track if we are mounted and have initial position
   const [isMounted, setIsMounted] = useState(false);
-  const [ready, setReady] = useState(false);
   
   useEffect(() => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsMounted(true);
   }, []);
-
-  useEffect(() => {
-      if (zenDoOneIconRect) {
-          setReady(true);
-      }
-  }, [zenDoOneIconRect]);
 
   // Calculate dynamic position based on the real DOM rect of the menu bar icon
   // Window width is 360. We want to center it under the icon.
@@ -45,10 +41,43 @@ export const Desktop = () => {
       {isMounted && (
         <div className="absolute inset-0 top-8 bottom-20 z-10 pointer-events-auto">
             
+            {/* Desktop File Icons Layer */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-6 pointer-events-auto z-0">
+                {/* Readme File */}
+                <div 
+                    className="group flex flex-col items-center gap-2 w-24 cursor-pointer p-2 rounded transition-colors"
+                    onDoubleClick={() => openApp('readme')}
+                    onClick={() => openApp('readme')} // Allow single click for touch/ease
+                >
+                     {/* Improved File Icon */}
+                     <div className="w-16 h-20 relative transition-transform">
+                         {/* Paper Background */}
+                         <div className="absolute inset-0 bg-[#2D2D2D] rounded-lg shadow-md border border-white/20" />
+                         
+                         {/* Markdown Logo / Content Simulation */}
+                         <div className="absolute inset-0 flex flex-col items-center justify-center pt-4 pb-2 gap-1.5 opacity-80">
+                             {/* MD Icon */}
+                             <div className="w-8 h-5 border-2 border-white/40 rounded-[2px] flex items-center justify-between px-1">
+                                <div className="text-[8px] font-bold text-white/60 leading-none">M</div>
+                                <div className="w-[1px] h-3 bg-white/40" />
+                                <div className="text-[8px] font-bold text-white/60 leading-none">↓</div>
+                             </div>
+                             {/* Lines */}
+                             <div className="w-8 h-[2px] bg-white/20 rounded-full" />
+                             <div className="w-8 h-[2px] bg-white/20 rounded-full" />
+                             <div className="w-6 h-[2px] bg-white/20 rounded-full" />
+                         </div>
+                     </div>
+                     
+                     <span className="text-white text-[13px] font-medium drop-shadow-md px-2 rounded-sm text-center leading-tight" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+                        README.md
+                     </span>
+                </div>
+            </div>
+
             {/* ZenDoOne Main App - Frameless Popover Style */}
-            {/* Render ONLY when we have the initial rect to ensure correct positioning. 
-                Once rendered, it stays mounted (ready=true) to preserve state. */}
-            {ready && (
+            {/* Render ONLY when we have the initial rect to ensure correct positioning. */}
+            {zenDoOneIconRect && (
                 <div className="pointer-events-auto">
                     <Window 
                         key="zendoone-window" 
@@ -92,6 +121,20 @@ export const Desktop = () => {
                     View on GitHub
                     </a>
                 </div>
+                </Window>
+            </div>
+
+            {/* System Settings Window */}
+            <div className="pointer-events-auto">
+                <Window id="settings" width={640} height={480} title="System Settings" titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
+                    <SystemSettings />
+                </Window>
+            </div>
+
+            {/* Readme Window */}
+            <div className="pointer-events-auto">
+                <Window id="readme" width={600} height={650} title="README.md" titleHidden={true} frameless={true} className="bg-transparent !shadow-none !border-none">
+                    <ReadmeApp />
                 </Window>
             </div>
             

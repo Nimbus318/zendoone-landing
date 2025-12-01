@@ -37,7 +37,7 @@ export const Dock = () => {
   );
 };
 
-const DockItem = ({ mouseX, icon, onClick, isOpen, id }: { mouseX: MotionValue; icon: React.ReactNode; onClick: () => void; isOpen: boolean; id: string }) => {
+const DockItem = ({ mouseX, icon, onClick, isOpen }: { mouseX: MotionValue; icon: React.ReactNode; onClick: () => void; isOpen: boolean }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const distance = useTransform(mouseX, (val) => {

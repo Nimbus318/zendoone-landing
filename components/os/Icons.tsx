@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 export const ZenDoOneStatusIcon = ({ className }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
@@ -16,12 +18,15 @@ export const ZenDoOneStatusIcon = ({ className }: { className?: string }) => (
 );
 
 export const ZenDoOneIcon = ({ className }: { className?: string }) => (
-  <img
-    src="/app-icon-256.png"
-    alt="ZenDoOne App Icon"
-    className={`object-contain ${className}`}
-    draggable={false}
-  />
+  <div className={`relative w-full h-full ${className}`}>
+    <Image
+        src="/app-icon-256.png"
+        alt="ZenDoOne App Icon"
+        fill
+        className="object-contain"
+        draggable={false}
+    />
+  </div>
 );
 
 export const FinderIcon = ({ className }: { className?: string }) => (

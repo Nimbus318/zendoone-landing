@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from "react";
 
-export type AppID = "zendoone" | "discord" | "github" | "settings" | "finder";
+export type AppID = "zendoone" | "discord" | "github" | "settings" | "finder" | "readme";
 
 export interface WindowState {
   id: AppID;
@@ -25,6 +25,7 @@ interface OSContextType {
   appStatuses: Record<AppID, string>;
   zenDoOneIconRect: DOMRect | null;
   zenDoOneState: ZenDoOneState; // Lifted State
+  isZenDoOneAllowed: boolean;
   openApp: (id: AppID) => void;
   closeApp: (id: AppID) => void;
   minimizeApp: (id: AppID) => void;
@@ -33,6 +34,7 @@ interface OSContextType {
   setAppStatus: (id: AppID, status: string) => void;
   setZenDoOneIconRect: (rect: DOMRect | null) => void;
   setZenDoOneState: React.Dispatch<React.SetStateAction<ZenDoOneState>>; // Setter
+  setZenDoOneAllowed: (allowed: boolean) => void;
 }
 
 const defaultWindows: Record<AppID, WindowState> = {
@@ -41,6 +43,7 @@ const defaultWindows: Record<AppID, WindowState> = {
   github: { id: "github", title: "GitHub", isOpen: false, isMinimized: false, zIndex: 1 },
   settings: { id: "settings", title: "Settings", isOpen: false, isMinimized: false, zIndex: 1 },
   finder: { id: "finder", title: "Finder", isOpen: false, isMinimized: false, zIndex: 1 },
+  readme: { id: "readme", title: "README.md", isOpen: false, isMinimized: false, zIndex: 1 },
 };
 
 const OSContext = createContext<OSContextType | undefined>(undefined);
@@ -49,7 +52,7 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
   const [windows, setWindows] = useState<Record<AppID, WindowState>>(defaultWindows);
   const [activeApp, setActiveApp] = useState<AppID | null>("zendoone");
   const [appStatuses, setAppStatuses] = useState<Record<AppID, string>>({
-      zendoone: "", discord: "", github: "", settings: "", finder: ""
+      zendoone: "", discord: "", github: "", settings: "", finder: "", readme: ""
   });
   const [zenDoOneIconRect, setZenDoOneIconRect] = useState<DOMRect | null>(null);
   // Initialize lifted state
@@ -58,6 +61,7 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
       currentTask: "",
       completedCount: 0
   });
+  const [isZenDoOneAllowed, setZenDoOneAllowed] = useState(false);
   const [maxZIndex, setMaxZIndex] = useState(10);
 
   const setAppStatus = useCallback((id: AppID, status: string) => {
@@ -112,12 +116,7 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const toggleApp = useCallback((id: AppID) => {
-    // We need to check current state, so we use a functional update or access state directly
-    // But since toggleApp depends on state, we need to be careful.
-    // Simplest is to just use the current windows state from closure if we add it to dependency, 
-    // OR use functional update logic carefully. 
-    // Ideally, toggleApp should just call open or minimize.
-    // Let's use the refs or just simplistic logic that might trigger re-renders but is safe.
+    let shouldFocus = false;
     setWindows(prev => {
         const app = prev[id];
         if (app.isOpen && !app.isMinimized && activeApp === id) {
@@ -125,17 +124,15 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
              return { ...prev, [id]: { ...prev[id], isMinimized: true } };
         } else {
              // Open
+             shouldFocus = true;
              return { ...prev, [id]: { ...prev[id], isOpen: true, isMinimized: false } };
         }
     });
-    // Note: activeApp logic inside toggle is tricky with functional updates. 
-    // For now, let's just let the user click again if needed, or refine this.
-    // Actually, for ZenDoOne, toggle means "Show/Hide".
     
-    // Correct logic:
-    // If open and active -> Minimize
-    // Else -> Open & Focus
-  }, [activeApp]); // Dependency on activeApp is needed here
+    if (shouldFocus) {
+        focusApp(id);
+    }
+  }, [activeApp, focusApp]); // Dependency on activeApp is needed here
 
   return (
     <OSContext.Provider value={{ 
@@ -144,6 +141,7 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
         appStatuses, 
         zenDoOneIconRect,
         zenDoOneState,
+        isZenDoOneAllowed,
         openApp, 
         closeApp, 
         minimizeApp, 
@@ -151,7 +149,8 @@ export const OSProvider = ({ children }: { children: ReactNode }) => {
         toggleApp, 
         setAppStatus, 
         setZenDoOneIconRect: setZenDoOneIconRectMemo,
-        setZenDoOneState
+        setZenDoOneState,
+        setZenDoOneAllowed
     }}>
       {children}
     </OSContext.Provider>

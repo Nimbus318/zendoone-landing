@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Wifi, Search, Command } from "lucide-react";
+import { Wifi, Search } from "lucide-react";
 import { useOS } from "@/context/OSContext";
 import { ZenDoOneStatusIcon } from "./Icons";
 
@@ -24,11 +24,30 @@ const ControlCenterIcon = () => (
     </div>
 )
 
+// Helper for menu items
+const MenuItem = ({ children, bold = false }: { children: React.ReactNode, bold?: boolean }) => (
+    <div className={`px-2.5 h-[22px] flex items-center rounded-[4px] hover:bg-white/10 cursor-default transition-colors ${bold ? 'font-bold' : 'font-medium'}`}>
+        {children}
+    </div>
+)
+
 export const MenuBar = () => {
-  const { activeApp, windows, toggleApp, appStatuses, setZenDoOneIconRect } = useOS();
+  const { activeApp, windows, toggleApp, appStatuses, setZenDoOneIconRect, openApp } = useOS();
   const [time, setTime] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const iconRef = useRef<HTMLDivElement>(null);
+  const [appleMenuOpen, setAppleMenuOpen] = useState(false);
+  const appleMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (appleMenuRef.current && !appleMenuRef.current.contains(event.target as Node)) {
+        setAppleMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -67,19 +86,73 @@ export const MenuBar = () => {
   const appName = activeApp ? windows[activeApp]?.title : "Finder";
   const zendooneStatus = appStatuses['zendoone'];
 
-  // Helper for menu items
-  const MenuItem = ({ children, bold = false }: { children: React.ReactNode, bold?: boolean }) => (
-      <div className={`px-2.5 h-[22px] flex items-center rounded-[4px] hover:bg-white/10 cursor-default transition-colors ${bold ? 'font-bold' : 'font-medium'}`}>
-          {children}
-      </div>
-  )
-
   return (
     <div className="h-[28px] w-full bg-black/20 backdrop-blur-2xl fixed top-0 z-[100] flex items-center justify-between px-2 text-[13px] text-white shadow-sm select-none border-b border-white/5">
-      <div className="flex items-center gap-0.5 h-full">
-        <MenuItem>
+      <div className="flex items-center gap-0.5 h-full" ref={appleMenuRef}>
+        <div 
+             className={`px-2.5 h-[22px] flex items-center rounded-[4px] cursor-default transition-colors ${appleMenuOpen ? 'bg-white/20' : 'hover:bg-white/10'}`}
+             onClick={() => setAppleMenuOpen(!appleMenuOpen)}
+        >
             <span className="text-[17px] leading-none pb-0.5"></span>
-        </MenuItem>
+        </div>
+
+        {appleMenuOpen && (
+            <div className="absolute top-full left-1 mt-1 w-64 bg-[#1e1e1e]/90 backdrop-blur-2xl rounded-lg shadow-2xl border border-white/10 py-1.5 flex flex-col text-white/90 z-[200]">
+                {/* About This Mac - Skeleton */}
+                <div className="px-1 py-0.5 mx-1">
+                     <div className="h-4 w-32 bg-white/10 rounded" />
+                </div>
+                
+                <div className="my-1 h-[1px] bg-white/10 mx-1" />
+                
+                {/* System Settings - Real */}
+                <div 
+                    className="px-3 py-0.5 hover:bg-blue-500 hover:text-white rounded mx-1 cursor-default text-[13px]"
+                    onClick={() => {
+                        openApp('settings');
+                        setAppleMenuOpen(false);
+                    }}
+                >
+                    System Settings...
+                </div>
+                
+                {/* App Store - Skeleton */}
+                <div className="px-1 py-0.5 mx-1 mt-1">
+                     <div className="h-4 w-24 bg-white/10 rounded" />
+                </div>
+                
+                <div className="my-1 h-[1px] bg-white/10 mx-1" />
+                
+                {/* Recent Items - Skeleton */}
+                <div className="px-1 py-0.5 mx-1">
+                     <div className="h-4 w-28 bg-white/10 rounded" />
+                </div>
+                
+                <div className="my-1 h-[1px] bg-white/10 mx-1" />
+                
+                {/* Force Quit - Skeleton */}
+                <div className="px-1 py-0.5 mx-1">
+                     <div className="h-4 w-36 bg-white/10 rounded" />
+                </div>
+                
+                <div className="my-1 h-[1px] bg-white/10 mx-1" />
+                
+                {/* Power Options - Skeletons */}
+                <div className="space-y-1 py-0.5">
+                    <div className="px-1 mx-1"><div className="h-4 w-16 bg-white/10 rounded" /></div>
+                    <div className="px-1 mx-1"><div className="h-4 w-20 bg-white/10 rounded" /></div>
+                    <div className="px-1 mx-1"><div className="h-4 w-24 bg-white/10 rounded" /></div>
+                </div>
+                
+                <div className="my-1 h-[1px] bg-white/10 mx-1" />
+                
+                {/* Lock/Logout - Skeletons */}
+                <div className="space-y-1 py-0.5">
+                    <div className="px-1 mx-1"><div className="h-4 w-28 bg-white/10 rounded" /></div>
+                    <div className="px-1 mx-1"><div className="h-4 w-32 bg-white/10 rounded" /></div>
+                </div>
+            </div>
+        )}
         
         <MenuItem bold>{appName}</MenuItem>
         

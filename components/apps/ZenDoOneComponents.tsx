@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, Clock, ChevronDown, ArrowUp, X, Plus, Play, Trash2, CirclePlay } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, Clock, ChevronDown, ArrowUp, X, Plus, Play, CirclePlay } from "lucide-react";
+import { motion } from "framer-motion";
 
 // --- Constants from Swift ---
 const THEME = {

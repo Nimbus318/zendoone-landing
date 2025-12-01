@@ -4,10 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { HeaderView, ParkingLotSection, DailyGoalsView, ParkingItem, DailyGoal, HistoryOverlay, HistoryItem, TimerDisplay, SuggestionCard } from "./ZenDoOneComponents";
-import { Check, ChevronLeft, CheckCircle2, BadgeCheck } from "lucide-react";
+import { Check, ChevronLeft } from "lucide-react";
 import { useOS } from "@/context/OSContext";
-
-type AppMode = "idle" | "focusing" | "completed";
 
 // --- Extracted Components ---
 
@@ -245,6 +243,7 @@ export const ZenDoOneApp = () => {
   
   // Confetti Canvas Ref
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const confettiInstance = useRef<any>(null);
 
   useEffect(() => {
