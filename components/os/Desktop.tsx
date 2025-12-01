@@ -117,7 +117,7 @@ export const Desktop = () => {
                     <Github size={48} className="text-white" />
                     <h2 className="text-xl font-bold">Open Source</h2>
                     <p className="text-gray-400 text-sm">Check out the code, leave a star, or fork the repo.</p>
-                    <a href="https://github.com" target="_blank" rel="noreferrer" className="px-6 py-2 bg-[#238636] hover:bg-[#2ea043] rounded-md text-white font-medium transition-colors border border-[rgba(240,246,252,0.1)]">
+                    <a href="https://github.com/Nimbus318/ZenDoOne" target="_blank" rel="noreferrer" className="px-6 py-2 bg-[#238636] hover:bg-[#2ea043] rounded-md text-white font-medium transition-colors border border-[rgba(240,246,252,0.1)]">
                     View on GitHub
                     </a>
                 </div>
