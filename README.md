@@ -58,7 +58,7 @@ I've been "dogfooding" ZenDoOne throughout this entire process. Every feature it
 
 Both the macOS app and this website are 100% Open Source.
 
-If you have any concerns about the unsigned app, I encourage you to let an AI (like DeepSeek or ChatGPT) audit the source code. I believe in total transparency and simple, honest tools.
+If you have any concerns about the unsigned app, I encourage you to let an AI (like ChatGPT or DeepWiki) audit the source code. I believe in total transparency and simple, honest tools.
 
 ---
 
