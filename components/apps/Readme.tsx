@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useOS } from '@/context/OSContext';
-import { ArrowRight, Heart, Terminal, X, Minus, Maximize2 } from 'lucide-react';
+import { ArrowRight, Heart, Terminal, X, Minus, Maximize2, Download } from 'lucide-react';
 
 export const ReadmeApp = () => {
   const { openApp, closeApp, minimizeApp } = useOS();
@@ -56,6 +56,19 @@ export const ReadmeApp = () => {
                 {/* Intro / Philosophy */}
                 <div>
                     <h1 className="text-2xl font-bold text-[#569cd6] mb-4"># Less Noise. More Focus.</h1>
+                    
+                    {/* Download Button */}
+                    <div className="mb-6">
+                        <a 
+                            href="https://github.com/Nimbus318/ZenDoOne/releases/download/v0.2.0/ZenDoOne.zip"
+                            className="inline-flex items-center gap-2 bg-[#238636] hover:bg-[#2ea043] text-white px-6 py-3 rounded-md font-bold transition-colors no-underline"
+                        >
+                            <Download size={18} />
+                            Download for macOS
+                        </a>
+                        <div className="text-xs text-[#cccccc] mt-2 ml-1">v0.2.0 | Universal | macOS 12+</div>
+                    </div>
+
                     <p className="text-[#cccccc] mb-4">
                         In a world where every AI product fights for your attention, I wanted to build something that does the opposite. 
                     </p>
