@@ -63,3 +63,5 @@ If you have any concerns about the unsigned app, I encourage you to let an AI (l
 ---
 
 *Built with focus, powered by AI.*
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=Nimbus318.zendoone-landing)
