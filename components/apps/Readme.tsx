@@ -60,13 +60,13 @@ export const ReadmeApp = () => {
                     {/* Download Button */}
                     <div className="mb-6">
                         <a 
-                            href="https://github.com/Nimbus318/ZenDoOne/releases/download/v0.2.0/ZenDoOne.zip"
+                            href="https://github.com/Nimbus318/ZenDoOne/releases/download/v0.2.1/ZenDoOne.zip"
                             className="inline-flex items-center gap-2 bg-[#238636] hover:bg-[#2ea043] text-white px-6 py-3 rounded-md font-bold transition-colors no-underline"
                         >
                             <Download size={18} />
                             Download for macOS
                         </a>
-                        <div className="text-xs text-[#cccccc] mt-2 ml-1">v0.2.0 | Universal | macOS 12+</div>
+                        <div className="text-xs text-[#cccccc] mt-2 ml-1">v0.2.1 | Universal | macOS 12+</div>
                     </div>
 
                     <p className="text-[#cccccc] mb-4">
