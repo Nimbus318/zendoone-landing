@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Caveat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { OSProvider } from "@/context/OSContext";
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           {children}
         </OSProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
