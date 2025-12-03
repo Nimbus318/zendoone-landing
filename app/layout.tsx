@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Caveat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { OSProvider } from "@/context/OSContext";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <OSProvider>
           {children}
         </OSProvider>
+        <Analytics />
       </body>
     </html>
   );
